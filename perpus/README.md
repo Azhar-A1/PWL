@@ -1,69 +1,252 @@
-# CodeIgniter 4 Application Starter
+# 📚 Sistem Informasi Perpustakaan Digital
 
-## What is CodeIgniter?
+Sistem Informasi Perpustakaan Digital adalah aplikasi berbasis web yang dibangun menggunakan **CodeIgniter 4** untuk membantu proses pengelolaan perpustakaan secara digital. Aplikasi ini menyediakan fitur manajemen buku, peminjaman dan pengembalian buku, perhitungan denda otomatis, pembayaran denda melalui **Midtrans Sandbox**, notifikasi **WhatsApp (WAHA API)**, serta integrasi **Open Library API** untuk mengambil data buku secara otomatis.
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+## 🏠 Dashboard
+*Tampilkan screenshot dashboard di sini.*
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+![Dasboard Member](foto/dashboard_member.jpg)
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+## 📚 Manajemen Buku
+![Manajanem Buku](foto/manajemen_buku.jpg)
 
-## Installation & updates
+## 📖 Peminjaman Buku
+![Peminjaman Buku](foto/pinjam_buku.jpg)
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+## 🔄 Pengembalian Buku
+![Pengembalian Buku](foto/pengembalian_buku.jpg)
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+## 💳 Pembayaran Denda (Midtrans Sandbox)
+![Pembayaran Denda](foto/pembayaran_denda.jpg)
 
-## Setup
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+# ✨ Fitur Utama
 
-## Important Change with index.php
+- Login Multi User (Admin & Member)
+- Dashboard Admin dan Member
+- CRUD Data Buku
+- CRUD Staff
+- CRUD User
+- Peminjaman Buku
+- Pengembalian Buku
+- Perhitungan Denda Otomatis
+- Pembayaran Denda Online menggunakan Midtrans Sandbox
+- Notifikasi WhatsApp menggunakan WAHA API
+- Integrasi Open Library API
+- REST API Buku
+- Upload Cover Buku
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+---
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+# 🛠 Persyaratan Sistem
 
-**Please** read the user guide for a better explanation of how CI4 works!
+Pastikan perangkat Anda memenuhi persyaratan berikut:
 
-## Repository Management
+- PHP 8.2 atau lebih baru
+- MySQL / MariaDB
+- Composer
+- CodeIgniter 4
+- XAMPP / Laragon
+- Git
+- Ekstensi PHP:
+  - intl
+  - curl
+  - mbstring
+  - mysqli
+  - openssl
+  - json
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+---
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+# 🚀 Cara Instalasi
 
-## Server Requirements
+## 1. Clone Repository
 
-PHP version 8.2 or higher is required, with the following extensions installed:
+```bash
+git clone https://github.com/USERNAME/NAMA_REPOSITORY.git
+cd NAMA_REPOSITORY
+```
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+Ganti **USERNAME** dan **NAMA_REPOSITORY** sesuai repository GitHub Anda.
 
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - The end of life date for PHP 8.1 was December 31, 2025.
-> - If you are still using below PHP 8.2, you should upgrade immediately.
-> - The end of life date for PHP 8.2 will be December 31, 2026.
+---
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+## 2. Install Dependency
 
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+```bash
+composer install
+```
+
+---
+
+## 3. Konfigurasi Environment
+
+Salin file
+
+```
+.env
+```
+
+menjadi
+
+```
+.env.example
+```
+
+Kemudian ubah konfigurasi berikut.
+
+```ini
+CI_ENVIRONMENT = development
+
+app.baseURL = 'http://localhost:8080/'
+
+database.default.hostname = localhost
+database.default.database = perpustakaan
+database.default.username = root
+database.default.password =
+database.default.DBDriver = MySQLi
+
+# Midtrans Sandbox
+MIDTRANS_SERVER_KEY=Masukkan_Server_Key
+MIDTRANS_CLIENT_KEY=Masukkan_Client_Key
+MIDTRANS_IS_PRODUCTION=false
+
+# WAHA API
+WAHA_BASE_URL=http://localhost:3000
+WAHA_API_KEY=Masukkan_API_Key
+WAHA_SESSION=default
+```
+
+---
+
+## 4. Setup Database
+
+Buat database baru dengan nama
+
+```
+perpustakaan
+```
+
+Kemudian jalankan migration dan seeder
+
+```bash
+php spark migrate --seed
+```
+
+atau apabila menggunakan seeder tertentu
+
+```bash
+php spark migrate
+php spark db:seed UserSeeder
+```
+
+---
+
+## 5. Jalankan Aplikasi
+
+```bash
+php spark serve
+```
+
+Kemudian buka browser
+
+```
+http://localhost:8080
+```
+
+---
+
+# 🔐 Akun Demo
+
+## 👨‍💼 Admin
+
+```
+Username : admin
+Password : admin123
+```
+
+---
+
+## 👤 Member
+
+```
+Username : member
+Password : member123
+
+atau
+
+Username : taufik
+Password : taufik123
+```
+
+> Sesuaikan kembali apabila username dan password pada Seeder Anda berbeda.
+
+---
+
+# 📂 Struktur Project
+
+```
+app
+ ├── Config
+ ├── Controllers
+ ├── Database
+ │   ├── Migrations
+ │   └── Seeds
+ ├── Filters
+ ├── Libraries
+ ├── Models
+ └── Views
+
+public
+vendor
+writable
+```
+
+---
+
+# 🔌 API & Integrasi
+
+## Midtrans Sandbox
+
+Digunakan untuk pembayaran denda perpustakaan secara online.
+
+Fitur:
+
+- Generate Snap Token
+- Pembayaran Online
+- Callback Notification
+- Update Status Pembayaran Otomatis
+
+---
+
+## WAHA API
+
+Digunakan untuk mengirim notifikasi WhatsApp secara otomatis.
+
+Notifikasi yang dikirim:
+
+- Konfirmasi Peminjaman Buku
+- Konfirmasi Pembayaran Denda
+
+---
+
+## Open Library API
+
+Digunakan untuk mengambil data buku secara otomatis berdasarkan ISBN.
+
+---
+
+# 🧰 Teknologi yang Digunakan
+
+- CodeIgniter 4
+- PHP 8
+- MySQL
+- Bootstrap 5
+- JavaScript
+- Midtrans Sandbox
+- WAHA API
+- Open Library API
+- Composer
+
+---

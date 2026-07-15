@@ -22,14 +22,25 @@
         <form method="post" action="/login">
             
             <div class="mb-3">
-                <input type="text" name="username" class="form-control" placeholder="Username" required>
+                <input type="text" name="login" class="form-control" placeholder="Username atau Email" required>
             </div>
 
             <div class="mb-3">
                 <input type="password" name="password" class="form-control" placeholder="Password" required>
             </div>
 
-            <button class="btn btn-primary w-100">Login</button>
+            <button class="btn btn-primary w-100">
+
+                Login
+
+            </button>
+
+            <a href="/register"
+            class="btn btn-success w-100 mt-3">
+
+                Registrasi Member
+
+            </a>
         </form>
 
     </div>

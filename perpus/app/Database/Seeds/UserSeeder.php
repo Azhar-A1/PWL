@@ -8,19 +8,32 @@ class UserSeeder extends Seeder
 {
     public function run()
     {
-        $data = [
-            [
-                'username' => 'admin',
-                'password' => password_hash('admin123', PASSWORD_DEFAULT),
-                'role_id' => 1 // admin
-            ],
-            [
-                'username' => 'member',
-                'password' => password_hash('member123', PASSWORD_DEFAULT),
-                'role_id' => 3 // member
-            ]
-        ];
+        $db = $this->db;
 
-        $this->db->table('users')->insertBatch($data);
+        // Admin
+        if (!$db->table('users')->where('username', 'admin')->get()->getRow()) {
+
+            $db->table('users')->insert([
+                'username'   => 'admin',
+                'email'      => 'admin@perpus.com',
+                'password'   => password_hash('admin123', PASSWORD_DEFAULT),
+                'role_id'    => 1,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
+        }
+
+        // Staff
+        if (!$db->table('users')->where('username', 'staff')->get()->getRow()) {
+
+            $db->table('users')->insert([
+                'username'   => 'staff',
+                'email'      => 'staff@perpus.com',
+                'password'   => password_hash('staff123', PASSWORD_DEFAULT),
+                'role_id'    => 2,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
+        }
     }
 }
